@@ -14,6 +14,10 @@ git: Show all files modified in the last 24 hours
 
     git log --name-only --pretty=format: --since=1.day |sort |uniq
 
+git: Show oneline log with author, date and colors
+
+    git log --pretty=format:"%C(auto)%h %Cgreen%<(14,trunc)%an %Cred%ci %Creset%s"
+
 #!/bin/bash
 id=$(od -A n -t d -N 4 /dev/urandom | md5sum);
 time=$(date --iso-8601='seconds');

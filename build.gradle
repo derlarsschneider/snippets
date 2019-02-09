@@ -12,6 +12,10 @@ plugins {
 
     // Apply the application plugin to add support for building an application
     id 'application'
+
+//    id 'docker'
+    id 'com.bmuschko.docker-remote-api' version '4.4.1'
+  
 }
 
 repositories {
@@ -24,9 +28,29 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:27.0.1-jre'
 
+    compile group: 'org.springframework.boot', name: 'spring-boot',             version: '2.1.2.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.2.RELEASE'
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    compileClasspath 'com.bmuschko:gradle-docker-plugin:4.4.1'
+    compileClasspath 'se.transmode.gradle:gradle-docker:1.1'
 }
 
 // Define the main class for the application
 mainClassName = 'snippets.App'
+
+
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+task createDockerfile(type: Dockerfile) {
+    from 'ubuntu:12.04'
+    label(['maintainer': 'Lars Schneider "derlarsschneider@gmail.com"'])
+}
+
+task buildImage(type: DockerBuildImage) {
+    dependsOn createDockerfile
+    tags.add('derlarsschneider/snippets:latest')
+}

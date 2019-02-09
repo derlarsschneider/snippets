@@ -45,7 +45,7 @@ jobs:
       - run: docker save -o docker-cache/built-image.tar derlarsschneider/snippets:$CIRCLE_BRANCH
       - run: docker push derlarsschneider/snippets:$CIRCLE_BRANCH
       - save_cache:
-          key: *docker_cache_key
+          key: docker_cache_key
           paths:
             - docker-cache
 

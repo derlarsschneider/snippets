@@ -40,7 +40,7 @@ jobs:
 
       # run tests!
       - run: gradle test
-      - run: docker build -f build/docker
+      - run: docker build build/docker
       - run: mkdir -p build/docker-cache
       - run: docker save -o build/docker-cache/built-image.tar derlarsschneider/snippets:$CIRCLE_BRANCH
       #- run: docker push derlarsschneider/snippets:$CIRCLE_BRANCH

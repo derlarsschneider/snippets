@@ -52,7 +52,7 @@ jobs:
       TERM: dumb
 
     steps:
-      - checkout
+    # - checkout
       - setup_remote_docker
 
       - run:
@@ -80,4 +80,5 @@ workflows:
     jobs:
       - build
       - push:
+          requires: build
           context: docker

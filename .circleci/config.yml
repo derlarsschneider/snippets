@@ -54,7 +54,11 @@ jobs:
           command: |
             mkdir -p build/docker-cache
             docker save -o build/docker-cache/built-image.tar derlarsschneider/snippets:latest
-      #- run: docker push derlarsschneider/snippets:$CIRCLE_BRANCH
+      - run:
+          name: Push docker image
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push derlarsschneider/snippets:latest
       - save_cache:
           key: docker_cache_key
           paths:

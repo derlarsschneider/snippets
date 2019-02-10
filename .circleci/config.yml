@@ -40,6 +40,11 @@ jobs:
           command: |
             gradle build
 
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - build
+
   push:
     executor: default-executor
     steps:

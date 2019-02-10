@@ -41,14 +41,16 @@ jobs:
 
       # run tests!
       - run:
-          name: build and run tests
+          name: Build and run tests
           command: |
             gradle build
       - run:
-          name: build and save docker image
+          name: Build docker image
           command: |
             gradle buildImage
             docker build build/docker
+      - run:
+          name: Save docker image
             mkdir -p build/docker-cache
             docker save -o build/docker-cache/built-image.tar derlarsschneider/snippets:$CIRCLE_BRANCH
       #- run: docker push derlarsschneider/snippets:$CIRCLE_BRANCH

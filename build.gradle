@@ -46,6 +46,7 @@ import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
 task createDockerfile(type: Dockerfile) {
+    dependsOn assemble
     from 'ubuntu:12.04'
     label(['maintainer': 'Lars Schneider "derlarsschneider@gmail.com"'])
 }
@@ -53,4 +54,5 @@ task createDockerfile(type: Dockerfile) {
 task buildImage(type: DockerBuildImage) {
     dependsOn createDockerfile
     tags.add('derlarsschneider/snippets:latest')
+    inputDir = new File('build/docker')
 }

@@ -54,6 +54,14 @@ jobs:
       - setup_remote_docker
 
       - run:
+          name: Debug output
+          command: |
+            pwd
+            ls -la
+            ls -la snippets
+            ls -la ~/
+            ls -la ~/snippets/
+      - run:
           name: Build docker image
           command: |
             gradle buildImage

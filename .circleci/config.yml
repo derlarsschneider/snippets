@@ -52,6 +52,7 @@ jobs:
       TERM: dumb
 
     steps:
+      - checkout
       - setup_remote_docker
 
       - run:

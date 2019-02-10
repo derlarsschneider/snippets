@@ -43,6 +43,9 @@ jobs:
   push:
     executor: default-executor
     steps:
+      - attach_workspace:
+          at: ~/
+
       - setup_remote_docker
 
       - run:

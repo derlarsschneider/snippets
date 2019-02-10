@@ -18,8 +18,7 @@ jobs:
     executor: default-executor
     steps:
       - checkout
-      - setup_remote_docker
-      
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -40,6 +39,11 @@ jobs:
           command: |
             gradle build
 
+      # Persist the build folder
+      # Attach in subsequent jobs with 
+      # - attach_workspace:
+      #     at: ~/snippets
+      
       - persist_to_workspace:
           root: .
           paths: 
@@ -48,10 +52,11 @@ jobs:
   push:
     executor: default-executor
     steps:
+      - checkout
+      - setup_remote_docker
+
       - attach_workspace:
           at: ~/snippets
-
-      - setup_remote_docker
 
       - run:
           name: Debug output
@@ -78,8 +83,9 @@ jobs:
           key: docker_cache_key
           paths:
             - build/docker-cache
+
 workflows:
-  version: 2
+  version: 2.1
   build_and_push:
     jobs:
       - build

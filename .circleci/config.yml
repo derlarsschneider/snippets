@@ -48,12 +48,12 @@ jobs:
           name: Build docker image
           command: |
             gradle buildImage
-            docker build build/docker
+          # docker build build/docker
       - run:
           name: Save docker image
           command: |
             mkdir -p build/docker-cache
-            docker save -o build/docker-cache/built-image.tar derlarsschneider/snippets:$CIRCLE_BRANCH
+            docker save -o build/docker-cache/built-image.tar derlarsschneider/snippets:latest
       #- run: docker push derlarsschneider/snippets:$CIRCLE_BRANCH
       - save_cache:
           key: docker_cache_key

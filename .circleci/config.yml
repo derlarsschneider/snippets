@@ -80,5 +80,6 @@ workflows:
     jobs:
       - build
       - push:
-          requires: build
-          context: docker
+         requires: 
+           - build
+         context: docker

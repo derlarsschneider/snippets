@@ -51,6 +51,7 @@ jobs:
             docker build build/docker
       - run:
           name: Save docker image
+          command: |
             mkdir -p build/docker-cache
             docker save -o build/docker-cache/built-image.tar derlarsschneider/snippets:$CIRCLE_BRANCH
       #- run: docker push derlarsschneider/snippets:$CIRCLE_BRANCH

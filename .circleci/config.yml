@@ -21,6 +21,8 @@ jobs:
       JVM_OPTS: -Xmx3200m
       TERM: dumb
 
+    context: docker
+
     steps:
       - checkout
       - setup_remote_docker
@@ -54,6 +56,7 @@ jobs:
           command: |
             mkdir -p build/docker-cache
             docker save -o build/docker-cache/built-image.tar derlarsschneider/snippets:latest
+      - run: echo $DOCKERHUB_USERNAME
       - run:
           name: Push docker image
           command: |

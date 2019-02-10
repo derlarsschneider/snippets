@@ -58,9 +58,7 @@ jobs:
           command: |
             pwd
             ls -la
-            ls -la snippets
             ls -la ~/
-            ls -la ~/snippets/
       - run:
           name: Build docker image
           command: |
